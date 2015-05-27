@@ -512,6 +512,7 @@ static void _FICReleaseImageData(void *info, const void *data, size_t size) {
 // by using NSFileProtectionNone
 - (BOOL)canAccessEntryData {
     BOOL result = YES;
+#ifdef FIC_APP_EXTENSION
     if ([_fileDataProtectionMode isEqualToString:NSFileProtectionComplete]) {
         result = [[UIApplication sharedApplication] isProtectedDataAvailable];
     } else if ([_fileDataProtectionMode isEqualToString:NSFileProtectionCompleteUntilFirstUserAuthentication]) {
@@ -527,6 +528,9 @@ static void _FICReleaseImageData(void *info, const void *data, size_t size) {
             }
         }
     }
+#else
+    
+#endif
     return result;
 }
 
